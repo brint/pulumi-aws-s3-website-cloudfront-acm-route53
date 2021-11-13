@@ -12,4 +12,12 @@ virtualenv -p python3.9 venv
 source venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+pulumi up
+```
+
+## Switching between environments
+
+```
+pulumi stack select dev
+pulumi stack select prod
 ```
