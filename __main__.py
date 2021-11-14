@@ -18,7 +18,11 @@ stack_tags = {
 # Create an AWS resource (S3 Bucket)
 # Use the stack, which is the environment name for
 # bucket naming.
-bucket = s3.Bucket('%s.%s.%s' % (aws.get_region().name, pulumi.get_stack(), domain), acl="private", tags=stack_tags)
+bucket = s3.Bucket('%s.%s.%s' % (aws.get_region().name,
+                                 pulumi.get_stack(),
+                                 domain),
+                   acl="private",
+                   tags=stack_tags)
 
 # Add a file
 bucketObject = s3.BucketObject(
