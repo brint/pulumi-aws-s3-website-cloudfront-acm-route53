@@ -1,4 +1,5 @@
 """An AWS Python Pulumi program"""
+import os
 
 import pulumi
 import pulumi_aws as aws
@@ -7,6 +8,7 @@ from pulumi_aws import s3
 # For pulling config options
 config = pulumi.Config()
 domain = config.require("domain")
+site_contents = config.require("pathToWebsiteContents")
 
 # Standard tags for all resources in the stack
 stack_tags = {
@@ -28,7 +30,7 @@ bucket = s3.Bucket('%s.%s.%s' % (aws.get_region().name,
 bucketObject = s3.BucketObject(
     'index.html',
     bucket=bucket.id,
-    source=pulumi.FileAsset('www/index.html')
+    source=pulumi.FileAsset(os.path.join(site_contents, 'index.html'))
 )
 
 # Export the name of the bucket

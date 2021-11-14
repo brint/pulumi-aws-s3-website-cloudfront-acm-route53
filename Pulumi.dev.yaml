@@ -1,3 +1,4 @@
 config:
   aws:region: us-east-2
   pulumi-aws-s3-website-cloudfront-acm-route53:domain: derpdonkey.com
+  pulumi-aws-s3-website-cloudfront-acm-route53:pathToWebsiteContents: www
