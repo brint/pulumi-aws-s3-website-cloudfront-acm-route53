@@ -48,9 +48,9 @@ s3_distribution = aws.cloudfront.Distribution(distribution_name,
     origins=[aws.cloudfront.DistributionOriginArgs(
         domain_name=bucket.bucket_regional_domain_name,
         origin_id=s3_origin_id,
-        # TODO
+        # TODO - broken
         s3_origin_config=aws.cloudfront.DistributionOriginS3OriginConfigArgs(
-            origin_access_identity="origin-access-identity/cloudfront/ABCDEFG1234567",
+            origin_access_identity=aws_cloudfront_origin_access_identity["s3_distribution"]["cloudfront_access_identity_path"],
         ),
     )],
     enabled=True,
@@ -100,3 +100,4 @@ s3_distribution = aws.cloudfront.Distribution(distribution_name,
 ### Exports
 # Export the name of the bucket
 pulumi.export('bucket_name', bucket.id)
+pulumi.export('cloudfront_distribution_endpoint', s3_distribution.domain_name)
